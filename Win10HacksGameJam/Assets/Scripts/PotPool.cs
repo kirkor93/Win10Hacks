@@ -39,6 +39,7 @@ public class PotPool : MonoBehaviour {
             go.transform.parent = this.transform;
             this.allPots.Add(go);
         }
+        GameManager.Instance.OnReset += Reset;
     }
 
     public void SpawnPot(int laneIndex)
@@ -56,5 +57,13 @@ public class PotPool : MonoBehaviour {
         GameObject pot = GameObject.Instantiate(PotPrefab, new Vector3(LaneLeftEnd.transform.position.x, 3.33f - laneIndex * this.LaneHeight, this.transform.position.z + 2.0f), Quaternion.identity) as GameObject;
         pot.transform.parent = this.transform;
         this.allPots.Add(pot);
+    }
+
+    void Reset()
+    {
+        foreach(GameObject go in this.allPots)
+        {
+            go.SetActive(false);
+        }
     }
 }

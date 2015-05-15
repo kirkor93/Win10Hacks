@@ -39,6 +39,7 @@ public class PigPool : MonoBehaviour {
             go.transform.parent = this.transform;
             this.allPigs.Add(go);
         }
+        GameManager.Instance.OnReset += Reset;
 	}
 
     public void SpawnPig(int laneIndex)
@@ -56,5 +57,13 @@ public class PigPool : MonoBehaviour {
         GameObject pig = GameObject.Instantiate(PigPrefab, new Vector3(this.LaneBegin.transform.position.x, 3.33f - laneIndex * LaneHeight, this.transform.position.z + 2.0f), Quaternion.identity) as GameObject;
         pig.transform.parent = this.transform;
         this.allPigs.Add(pig);
+    }
+
+    void Reset()
+    {
+        foreach(GameObject go in this.allPigs)
+        {
+            go.SetActive(false);
+        }
     }
 }

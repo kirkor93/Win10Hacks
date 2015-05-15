@@ -15,8 +15,9 @@ public class Pot : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void Update ()
     {
+        if (GameManager.Instance.IsPaused) return;
         this.myTransform.Rotate(this.myTransform.forward, this.RollSpeed * Time.deltaTime);
         this.myTransform.position += Vector3.right * Speed * Time.deltaTime;
 	}

@@ -15,8 +15,9 @@ public class Pig : MonoBehaviour {
   	}
 	
 	// Update is called once per frame
-	void Update () 
+	void Update ()
     {
+        if (GameManager.Instance.IsPaused) return;
         this.myTransform.Translate(Vector3.left * Speed * Time.deltaTime);
 	}
 

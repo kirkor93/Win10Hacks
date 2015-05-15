@@ -15,7 +15,7 @@ public class PigManager : MonoBehaviour {
 
     void Update()
     {
-
+        if (GameManager.Instance.IsPaused) return;
     }
 
     private void SpawnPig()
