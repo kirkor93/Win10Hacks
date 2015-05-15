@@ -28,9 +28,9 @@ public class HeavyPig : MonoBehaviour {
 
     void SmashPig()
     {
-        BurgerPool.Instance.SpawnBurger(this.myTransform.position);
         --HP;
         if (HP > 0) return;
+        BurgerPool.Instance.SpawnBurger(this.myTransform.position);
         HP = 3;
         this.gameObject.SetActive(false);
     }
