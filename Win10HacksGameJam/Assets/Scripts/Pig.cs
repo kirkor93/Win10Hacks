@@ -27,7 +27,7 @@ public class Pig : MonoBehaviour {
 
     void SmashPig()
     {
-        Debug.Log("Pig was smashed. Spawning burger");
+        BurgerPool.Instance.SpawnBurger(this.myTransform.position);
         this.gameObject.SetActive(false);
     }
 }
