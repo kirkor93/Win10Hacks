@@ -17,10 +17,13 @@ public class RightPanelController : MonoBehaviour
     [Header("Parameters")]
     [Space(10)]
     public int _initialPotCount = 5;
-    private int _potCount = 0;
-
-    private float _currentPotProgres = 0.0f;
     public float _potProgresMultiplier = 0.002f;
+    
+    private int _potCount = 0;
+    private float _currentPotProgres = 0.0f;
+
+    [SerializeField]
+    private AnimationActivator messageSpinWheel = null;
 
     private static RightPanelController _instance;
     public static RightPanelController instance
@@ -83,7 +86,16 @@ public class RightPanelController : MonoBehaviour
             --this._potCount;
             return true;
         }else{
+            DisplayMessageSpinWheel();
             return false;
+        }
+    }
+
+    public void DisplayMessageSpinWheel()
+    {
+        if(this.messageSpinWheel != null)
+        {
+            this.messageSpinWheel.PlayMessageAnim();
         }
     }
 }
