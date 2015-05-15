@@ -10,8 +10,9 @@ public class AnimationActivator : MonoBehaviour
     {
 	    if(AnimationActivator.anims == null)
         {
-            AnimationActivator.anims = new string[1];
+            AnimationActivator.anims = new string[2];
             AnimationActivator.anims[0] = "anim1";
+            AnimationActivator.anims[1] = "anim2";
         }
 	}
 	
