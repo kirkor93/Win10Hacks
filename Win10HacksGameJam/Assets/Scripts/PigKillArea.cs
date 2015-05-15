@@ -5,8 +5,6 @@ using System.Collections.Generic;
 public class PigKillArea : MonoBehaviour {
 
     public int HP = 10;
-    public int FirstDestroyLevel = 7;
-    public int SecondDestroyLevel = 3;
 
     public Transform Min;
     public Transform Max;
@@ -14,8 +12,6 @@ public class PigKillArea : MonoBehaviour {
 
     private float xDifference;
     private float yDifference;
-    private bool firstDestroyLevelReached;
-    private bool secondDestroyLevelReached;
 
     private List<GameObject> particles = new List<GameObject>();
 
@@ -47,29 +43,18 @@ public class PigKillArea : MonoBehaviour {
         if(HP < 0)
         {
             GameManager.Instance.GameOver();
+            return;
         }
-        else if(!secondDestroyLevelReached && HP < this.SecondDestroyLevel)
-        {
-            secondDestroyLevelReached = true;
-            SpawnParticles();
-        }
-        else if(!firstDestroyLevelReached && HP < this.FirstDestroyLevel)
-        {
-            SpawnParticles();
-            firstDestroyLevelReached = true;
-        }
+        SpawnParticles();
     }
 
     void SpawnParticles()
     {
         System.Random rnd = new System.Random();
-        for(int i = 0; i < 3; ++i)
-        {
-            float x = (float)rnd.NextDouble() * xDifference + Min.position.x;
-            float y = (float)rnd.NextDouble() * yDifference + Min.position.y;
-            GameObject go = Instantiate(this.FirePrefab, new Vector3(x, y, 10.0f), Quaternion.identity) as GameObject;
-            this.particles.Add(go);
-        }
+        float x = (float)rnd.NextDouble() * xDifference + Min.position.x;
+        float y = (float)rnd.NextDouble() * yDifference + Min.position.y;
+        GameObject go = Instantiate(this.FirePrefab, new Vector3(x, y, 10.0f), Quaternion.identity) as GameObject;
+        this.particles.Add(go);
     }
 
     void Reset()
