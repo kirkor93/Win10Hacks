@@ -7,11 +7,13 @@ public class HeavyPig : MonoBehaviour {
 
     private Transform myTransform;
     private int HP = 3;
+    private Animator myAnimator;
 
     // Use this for initialization
     void Start()
     {
         this.myTransform = this.GetComponent<Transform>();
+        this.myAnimator = this.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -29,6 +31,7 @@ public class HeavyPig : MonoBehaviour {
     void SmashPig()
     {
         --HP;
+        this.myAnimator.SetInteger("HP", this.HP);
         if (HP > 0) return;
         BurgerPool.Instance.SpawnBurger(this.myTransform.position);
         HP = 3;
