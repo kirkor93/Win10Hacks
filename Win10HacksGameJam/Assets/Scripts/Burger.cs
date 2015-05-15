@@ -4,12 +4,15 @@ using System.Collections;
 public class Burger : MonoBehaviour {
 
     public Color BlinkingColor;
+    public float BlinkingSpeed = 2.0f;
 
     private Collider2D myCollider = null;
     private SpriteRenderer myRenderer = null;
     private float timer = 0.0f;
     private bool up = true;
     private Color startColor;
+
+    private float destroyTimer = 0.0f;
 
     // Use this for initialization
     void Start()
@@ -23,9 +26,17 @@ public class Burger : MonoBehaviour {
     void Update()
     {
         if (GameManager.Instance.IsPaused) return;
+
+        destroyTimer += Time.deltaTime;
+        if(destroyTimer > 3.0f)
+        {
+            this.destroyTimer = 0.0f;
+            this.gameObject.SetActive(false);
+        }
+
         if (up)
         {
-            timer += 3.5f * Time.deltaTime;
+            timer += this.BlinkingSpeed * Time.deltaTime;
             if(timer > 1.0f)
             {
                 up = false;
@@ -33,7 +44,7 @@ public class Burger : MonoBehaviour {
         }
         else
         {
-            timer -= 3.5f * Time.deltaTime;
+            timer -= this.BlinkingSpeed * Time.deltaTime;
             if(timer < 0.0f)
             {
                 up = true;
