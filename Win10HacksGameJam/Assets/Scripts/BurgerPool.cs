@@ -37,6 +37,7 @@ public class BurgerPool : MonoBehaviour {
             go.transform.parent = this.transform;
             this.allBurgers.Add(go);
         }
+        GameManager.Instance.OnReset += Reset;
     }
 
     public void SpawnBurger(Vector3 position)
@@ -51,8 +52,16 @@ public class BurgerPool : MonoBehaviour {
             }
         }
 
-        GameObject pot = GameObject.Instantiate(BurgerPrefab, position, Quaternion.identity) as GameObject;
-        pot.transform.parent = this.transform;
-        this.allBurgers.Add(pot);
+        GameObject burger = GameObject.Instantiate(BurgerPrefab, position, Quaternion.identity) as GameObject;
+        burger.transform.parent = this.transform;
+        this.allBurgers.Add(burger);
+    }
+
+    void Reset()
+    {
+        foreach(GameObject go in this.allBurgers)
+        {
+            go.SetActive(false);
+        }
     }
 }

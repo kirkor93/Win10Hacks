@@ -15,8 +15,9 @@ public class Lane : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void Update ()
     {
+        if (GameManager.Instance.IsPaused) return;
 	    if(Input.GetMouseButtonDown(0))
         {
             TryRaycast();
@@ -32,7 +33,10 @@ public class Lane : MonoBehaviour
         {
             if(hit.collider == this.myCollider)
             {
-                PotPool.Instance.SpawnPot(this.LaneIndex);
+                if(RightPanelController.instance.GetPotToThrow())
+                {
+                    PotPool.Instance.SpawnPot(this.LaneIndex);
+                }
             }
         }
     }
