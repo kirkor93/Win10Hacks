@@ -23,11 +23,15 @@ public class PigPool : MonoBehaviour {
     }
 
     public GameObject PigPrefab;
+    public GameObject SuperPigPrefab;
+    public GameObject HeavyPigPrefab;
     public float LaneHeight = 3.33f;
     public int StartPigCount = 5;
     public GameObject LaneBegin;
 
     private List<GameObject> allPigs = new List<GameObject>();
+    private List<GameObject> allSuperPigs = new List<GameObject>();
+    private List<GameObject> allHeavyPigs = new List<GameObject>();
 
 	// Use this for initialization
 	void Start () 
@@ -39,14 +43,46 @@ public class PigPool : MonoBehaviour {
             go.transform.parent = this.transform;
             this.allPigs.Add(go);
         }
+        for (int i = 0; i < this.StartPigCount; ++i)
+        {
+            GameObject go = GameObject.Instantiate(this.SuperPigPrefab, this.transform.position, Quaternion.identity) as GameObject;
+            go.SetActive(false);
+            go.transform.parent = this.transform;
+            this.allSuperPigs.Add(go);
+        }
+        for (int i = 0; i < this.StartPigCount; ++i)
+        {
+            GameObject go = GameObject.Instantiate(this.HeavyPigPrefab, this.transform.position, Quaternion.identity) as GameObject;
+            go.SetActive(false);
+            go.transform.parent = this.transform;
+            this.allHeavyPigs.Add(go);
+        }
         GameManager.Instance.OnReset += Reset;
 	}
 
     public void SpawnPig(int laneIndex)
     {
-        foreach(GameObject go in allPigs)
+        System.Random rnd = new System.Random();
+        double r = rnd.NextDouble();
+        if(r > 0.8f)
         {
-            if(!go.activeInHierarchy)
+            SpawnHeavyPig(laneIndex);
+        }
+        else if(r > 0.6f)
+        {
+            SpawnSuperPig(laneIndex);
+        }
+        else
+        {
+            SpawnNormalPig(laneIndex);
+        }
+    }
+
+    private void SpawnNormalPig(int laneIndex)
+    {
+        foreach (GameObject go in allPigs)
+        {
+            if (!go.activeInHierarchy)
             {
                 go.transform.position = new Vector3(this.LaneBegin.transform.position.x, 4.3f - laneIndex * this.LaneHeight, this.transform.position.z + 2.0f);
                 go.SetActive(true);
@@ -57,6 +93,40 @@ public class PigPool : MonoBehaviour {
         GameObject pig = GameObject.Instantiate(PigPrefab, new Vector3(this.LaneBegin.transform.position.x, 4.3f - laneIndex * LaneHeight, this.transform.position.z + 2.0f), Quaternion.identity) as GameObject;
         pig.transform.parent = this.transform;
         this.allPigs.Add(pig);
+    }
+
+    private void SpawnSuperPig(int laneIndex)
+    {
+        foreach (GameObject go in allSuperPigs)
+        {
+            if (!go.activeInHierarchy)
+            {
+                go.transform.position = new Vector3(this.LaneBegin.transform.position.x, 4.3f - laneIndex * this.LaneHeight, this.transform.position.z + 2.0f);
+                go.SetActive(true);
+                return;
+            }
+        }
+
+        GameObject pig = GameObject.Instantiate(SuperPigPrefab, new Vector3(this.LaneBegin.transform.position.x, 4.3f - laneIndex * LaneHeight, this.transform.position.z + 2.0f), Quaternion.identity) as GameObject;
+        pig.transform.parent = this.transform;
+        this.allSuperPigs.Add(pig);
+    }
+
+    private void SpawnHeavyPig(int laneIndex)
+    {
+        foreach (GameObject go in allHeavyPigs)
+        {
+            if (!go.activeInHierarchy)
+            {
+                go.transform.position = new Vector3(this.LaneBegin.transform.position.x, 4.3f - laneIndex * this.LaneHeight, this.transform.position.z + 2.0f);
+                go.SetActive(true);
+                return;
+            }
+        }
+
+        GameObject pig = GameObject.Instantiate(HeavyPigPrefab, new Vector3(this.LaneBegin.transform.position.x, 4.3f - laneIndex * LaneHeight, this.transform.position.z + 2.0f), Quaternion.identity) as GameObject;
+        pig.transform.parent = this.transform;
+        this.allHeavyPigs.Add(pig);
     }
 
     void Reset()
