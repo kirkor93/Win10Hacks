@@ -28,7 +28,8 @@ public class Lane : MonoBehaviour
     {
         RaycastHit2D hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        hit = Physics2D.Raycast(ray.origin, ray.direction);
+        int mask = ~(1 << 8);
+        hit = Physics2D.Raycast(ray.origin, ray.direction,float.MaxValue,mask);
         if(hit != null && hit.collider != null)
         {
             if(hit.collider == this.myCollider)
