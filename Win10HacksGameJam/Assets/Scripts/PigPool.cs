@@ -48,13 +48,13 @@ public class PigPool : MonoBehaviour {
         {
             if(!go.activeInHierarchy)
             {
-                go.transform.position = new Vector3(this.LaneBegin.transform.position.x, 3.33f - laneIndex * this.LaneHeight, this.transform.position.z + 2.0f);
+                go.transform.position = new Vector3(this.LaneBegin.transform.position.x, 4.3f - laneIndex * this.LaneHeight, this.transform.position.z + 2.0f);
                 go.SetActive(true);
                 return;
             }
         }
 
-        GameObject pig = GameObject.Instantiate(PigPrefab, new Vector3(this.LaneBegin.transform.position.x, 3.33f - laneIndex * LaneHeight, this.transform.position.z + 2.0f), Quaternion.identity) as GameObject;
+        GameObject pig = GameObject.Instantiate(PigPrefab, new Vector3(this.LaneBegin.transform.position.x, 4.3f - laneIndex * LaneHeight, this.transform.position.z + 2.0f), Quaternion.identity) as GameObject;
         pig.transform.parent = this.transform;
         this.allPigs.Add(pig);
     }

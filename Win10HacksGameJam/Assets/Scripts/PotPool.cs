@@ -48,13 +48,13 @@ public class PotPool : MonoBehaviour {
         {
             if (!go.activeInHierarchy)
             {
-                go.transform.position = new Vector3(LaneLeftEnd.transform.position.x, 3.33f - laneIndex * this.LaneHeight, this.transform.position.z + 2.0f);
+                go.transform.position = new Vector3(LaneLeftEnd.transform.position.x, 4.3f - laneIndex * this.LaneHeight, this.transform.position.z + 2.0f);
                 go.SetActive(true);
                 return;
             }
         }
 
-        GameObject pot = GameObject.Instantiate(PotPrefab, new Vector3(LaneLeftEnd.transform.position.x, 3.33f - laneIndex * this.LaneHeight, this.transform.position.z + 2.0f), Quaternion.identity) as GameObject;
+        GameObject pot = GameObject.Instantiate(PotPrefab, new Vector3(LaneLeftEnd.transform.position.x, 4.3f - laneIndex * this.LaneHeight, this.transform.position.z + 2.0f), Quaternion.identity) as GameObject;
         pot.transform.parent = this.transform;
         this.allPots.Add(pot);
     }
