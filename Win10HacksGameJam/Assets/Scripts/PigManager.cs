@@ -15,24 +15,7 @@ public class PigManager : MonoBehaviour {
 
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            TryRaycast();
-        }
-    }
 
-    private void TryRaycast()
-    {
-        RaycastHit2D hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        hit = Physics2D.Raycast(ray.origin, ray.direction);
-        if (hit != null && hit.collider != null)
-        {
-            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Pig"))
-            {
-                hit.collider.gameObject.SendMessage("SmashPig");
-            }
-        }
     }
 
     private void SpawnPig()

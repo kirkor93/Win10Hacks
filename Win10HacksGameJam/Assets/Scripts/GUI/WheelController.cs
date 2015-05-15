@@ -4,21 +4,31 @@ using UnityEngine.UI;
 
 public class WheelController : MonoBehaviour 
 {
-
-    private float _maxSpeed = 720.0f;
-    private float _minSpeed = 0.0f;
-    private float _currentSpeed = 0.0f;
-    private float _speedDrag = 15.0f;
-    private float _direction = -1.0f;
-
-    private float _spinTheWheelValue = 15.0f;
-
+    [Space(10)]
+    [Header("Object References")]
     [SerializeField]
     private Image _wheelImage = null;
     [SerializeField]
     private Slider _speedIndicator = null;
     [SerializeField]
     private Text _potCounter = null;
+
+    [Header("Parameters")]
+    [Space(10)]
+    public float _maxSpeed = 720.0f;
+    public float _minSpeed = 0.0f;
+    public float _currentSpeed = 0.0f;
+    public float _speedDrag = 45.0f;
+    private float _direction = -1.0f;
+    public float _spinTheWheelValue = 45.0f;
+
+    public float CurrentSpeed
+    {
+        get
+        {
+            return this._currentSpeed;
+        }
+    }
 
     void Start()
     {

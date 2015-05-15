@@ -15,7 +15,6 @@ public class PigKillArea : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log(LayerMask.LayerToName(col.gameObject.layer));
         if(col.gameObject.layer == LayerMask.NameToLayer("Pig"))
         {
             col.SendMessage("Kill", SendMessageOptions.DontRequireReceiver);

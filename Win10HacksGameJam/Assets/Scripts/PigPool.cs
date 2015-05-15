@@ -24,7 +24,7 @@ public class PigPool : MonoBehaviour {
 
     public GameObject PigPrefab;
     public float LaneHeight = 3.33f;
-    public int StartingPigCount = 5;
+    public int StartPigCount = 5;
     public GameObject LaneBegin;
 
     private List<GameObject> allPigs = new List<GameObject>();
@@ -32,7 +32,7 @@ public class PigPool : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
     {
-	    for(int i = 0; i < this.StartingPigCount; ++i)
+	    for(int i = 0; i < this.StartPigCount; ++i)
         {
             GameObject go = GameObject.Instantiate(this.PigPrefab, this.transform.position, Quaternion.identity) as GameObject;
             go.SetActive(false);
@@ -54,6 +54,7 @@ public class PigPool : MonoBehaviour {
         }
 
         GameObject pig = GameObject.Instantiate(PigPrefab, new Vector3(this.LaneBegin.transform.position.x, 3.33f - laneIndex * LaneHeight, this.transform.position.z + 2.0f), Quaternion.identity) as GameObject;
+        pig.transform.parent = this.transform;
         this.allPigs.Add(pig);
     }
 }
