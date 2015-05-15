@@ -7,5 +7,6 @@ public class ParticleSorter : MonoBehaviour {
     void Start()
     {
         //Change particle sorting layer
+        GetComponent<ParticleSystem>().GetComponent<Renderer>().sortingLayerName = "Particles";
     }
 }
