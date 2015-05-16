@@ -10,7 +10,8 @@ public enum GameState
     GS_MENUPAUSE = 3,
     GS_GAME = 4,
     GS_SCORESCREEN = 5,
-    GS_MENUCREDITS = 6
+    GS_MENUCREDITS = 6,
+    GS_MENUUPGRADES= 7
 }
 
 public class MenuManager : MonoBehaviour 
@@ -30,6 +31,8 @@ public class MenuManager : MonoBehaviour
     private GameObject MenuScoreScreen = null;
     [SerializeField]
     private GameObject MenuCredits = null;
+    [SerializeField]
+    private GameObject MenuUpgrades = null;
 
     [SerializeField]
     private Text scoreScreenText = null;
@@ -62,6 +65,8 @@ public class MenuManager : MonoBehaviour
                 return this.MenuScoreScreen;
             case GameState.GS_MENUCREDITS:
                 return this.MenuCredits;
+            case GameState.GS_MENUUPGRADES:
+                return this.MenuUpgrades;
         }
         return null;
     }
@@ -132,5 +137,15 @@ public class MenuManager : MonoBehaviour
         this._currentGameState = GameState.GS_MENUCREDITS;
         go = GetGameStateGO(this._currentGameState);
         go.SetActive(true);
+    }
+
+    public void OnButtonUpgrades()
+    {
+        GameObject go = GetGameStateGO(this._currentGameState);
+        //go.SetActive(false);
+        this._currentGameState = GameState.GS_MENUUPGRADES;
+        go = GetGameStateGO(this._currentGameState);
+        go.SetActive(true);
+        GameManager.Instance.Pause();
     }
 }

@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private MenuManager menuManager = null;
+    [SerializeField]
+    private UpgradeManager upgradeManager = null;
 
     public static GameManager Instance
     {
@@ -43,6 +45,7 @@ public class GameManager : MonoBehaviour
     {
         this.cashValue = 0;
         this.pigsCrashed = 0;
+        this.upgradeManager.Reset();
         if(OnReset != null)
         {
             OnReset();
@@ -77,5 +80,10 @@ public class GameManager : MonoBehaviour
     public int GetCash()
     {
         return this.cashValue;
+    }
+
+    public void SetCash(int value)
+    {
+        this.cashValue = value;
     }
 }

@@ -12,6 +12,8 @@ public class WheelController : MonoBehaviour
     private Slider _speedIndicator = null;
     [SerializeField]
     private Text _potCounter = null;
+    [SerializeField]
+    private UpgradeManager upgradeManager = null;
 
     [Header("Parameters")]
     [Space(10)]
@@ -59,6 +61,7 @@ public class WheelController : MonoBehaviour
     {
         if (!GameManager.Instance.IsPaused)
         {
+            this._maxSpeed = this.upgradeManager.MaxStoneSpeed;
             ProcesWheel();
             UpdateLabels();
         }

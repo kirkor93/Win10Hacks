@@ -15,6 +15,8 @@ public class RightPanelController : MonoBehaviour
     private Text _potCouter = null;
     [SerializeField]
     private Text _cashCounter = null;
+    [SerializeField]
+    private UpgradeManager upgradeManager = null;
 
     [Header("Parameters")]
     [Space(10)]
@@ -74,10 +76,15 @@ public class RightPanelController : MonoBehaviour
     void ProcesPotCreation()
     {
         this._currentPotProgres += this._wheelController.CurrentSpeed * this._potProgresMultiplier * Time.deltaTime;
-        if(this._currentPotProgres > 1.0f)
+        if (this._potCount < this.upgradeManager.MaxPotCount)
         {
-            this._currentPotProgres -= 1.0f;
-            this._potCount += 1;
+            if (this._currentPotProgres > 1.0f)
+            {
+                this._currentPotProgres -= 1.0f;
+                this._potCount += 1;
+            }
+        }else{
+            this._currentPotProgres = Mathf.Clamp(this._currentPotProgres, 0.0f, 1.0f);
         }
     }
     void ProcesPotIndicator()
