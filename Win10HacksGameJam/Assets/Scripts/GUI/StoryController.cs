@@ -65,7 +65,7 @@ public class StoryController : MonoBehaviour
         int slidesCount = this.slides.Length;
         if (this.currentSlide >= slidesCount)
         {
-            this.menuManager.OnButtonMainMenu();
+            this.menuManager.OnButtonNewGame();
         }
         else
         {
