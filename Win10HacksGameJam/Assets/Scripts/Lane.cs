@@ -26,7 +26,7 @@ public class Lane : MonoBehaviour
         {
             foreach(Touch t in Input.touches)
             {
-                if (t.phase != TouchPhase.Began) return;
+                if (t.phase != TouchPhase.Began) continue;
                 TryRaycast(t.position);
             }
         }

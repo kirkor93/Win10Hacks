@@ -92,6 +92,7 @@ public class MenuManager : MonoBehaviour
     {
         GameObject go = GetGameStateGO(this._currentGameState);
         go.SetActive(false);
+        this.MenuGame.SetActive(false);
         this._currentGameState = GameState.GS_MENUMAIN;
         go = GetGameStateGO(this._currentGameState);
         go.SetActive(true);
@@ -99,7 +100,7 @@ public class MenuManager : MonoBehaviour
     public void OnButtonPause()
     {
         GameObject go = GetGameStateGO(this._currentGameState);
-        go.SetActive(false);
+        //go.SetActive(false);
         this._currentGameState = GameState.GS_MENUPAUSE;
         go = GetGameStateGO(this._currentGameState);
         go.SetActive(true);
