@@ -4,7 +4,7 @@ using System.Collections;
 public class StoryController : MonoBehaviour 
 {
     private float timer = 0.0f;
-    private float storyInterval = 4.0f;
+    public float storyInterval = 4.0f;
     private int currentSlide = -1;
 
     [SerializeField]
