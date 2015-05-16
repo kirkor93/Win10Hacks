@@ -7,6 +7,10 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
     private int cashValue = 0;
     private int burgerCashValue = 5;
+    private int pigsCrashed = 0;
+
+    [SerializeField]
+    private MenuManager menuManager = null;
 
     public static GameManager Instance
     {
@@ -37,7 +41,8 @@ public class GameManager : MonoBehaviour
 
     public void Reset()
     {
-        cashValue = 0;
+        this.cashValue = 0;
+        this.pigsCrashed = 0;
         if(OnReset != null)
         {
             OnReset();
@@ -57,11 +62,16 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         this.isPaused = true;
+        this.menuManager.OnGameOver(this.cashValue, pigsCrashed);
         //Game over logic
     }
     public void AddBurger()
     {
         this.cashValue += burgerCashValue;
+    }
+    public void AddPig()
+    {
+        ++this.pigsCrashed;
     }
 
     public int GetCash()

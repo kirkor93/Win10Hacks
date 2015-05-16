@@ -80,6 +80,7 @@ public class InstantPig : MonoBehaviour {
 
     void SmashPig()
     {
+        GameManager.Instance.AddPig();
         AudioSource.PlayClipAtPoint(DeathSound, Camera.main.transform.position, 0.4f);
         BurgerPool.Instance.SpawnBurger(this.myTransform.position);
         this.gameObject.SetActive(false);

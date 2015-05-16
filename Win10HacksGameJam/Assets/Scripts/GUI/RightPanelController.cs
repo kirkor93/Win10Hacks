@@ -13,6 +13,8 @@ public class RightPanelController : MonoBehaviour
     private Image _potImage = null;
     [SerializeField]
     private Text _potCouter = null;
+    [SerializeField]
+    private Text _cashCounter = null;
 
     [Header("Parameters")]
     [Space(10)]
@@ -82,6 +84,8 @@ public class RightPanelController : MonoBehaviour
     {
         this._potImage.fillAmount = this._currentPotProgres;
         this._potCouter.text = "x " + this._potCount;
+        this._cashCounter.text = "x " + GameManager.Instance.GetCash().ToString();
+        
     }
 
     public void ResetGUI()
