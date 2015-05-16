@@ -22,9 +22,12 @@ public class PigManager : MonoBehaviour {
 
     private void SpawnPig()
     {
-        System.Random rnd = new System.Random();
-        int lane = (int)rnd.Next() % this.LaneNumber;
-        PigPool.Instance.SpawnPig(lane);
+        if (!GameManager.Instance.IsPaused)
+        {
+            System.Random rnd = new System.Random();
+            int lane = (int)rnd.Next() % this.LaneNumber;
+            PigPool.Instance.SpawnPig(lane);
+        }
         Invoke("SpawnPig", this.InitialPigSpawnCooldown);
     }
 

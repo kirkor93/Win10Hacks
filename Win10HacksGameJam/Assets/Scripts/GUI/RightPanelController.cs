@@ -56,12 +56,17 @@ public class RightPanelController : MonoBehaviour
         }
 
         this._potCount = this._initialPotCount;
+
+        GameManager.Instance.OnReset += ResetGUI;
     }
 
     void Update()
     {
-        ProcesPotCreation();
-        ProcesPotIndicator();
+        if (!GameManager.Instance.IsPaused)
+        {
+            ProcesPotCreation();
+            ProcesPotIndicator();
+        }
     }
 
     void ProcesPotCreation()
@@ -77,6 +82,13 @@ public class RightPanelController : MonoBehaviour
     {
         this._potImage.fillAmount = this._currentPotProgres;
         this._potCouter.text = "x " + this._potCount;
+    }
+
+    public void ResetGUI()
+    {
+        this._currentPotProgres = 0.0f;
+        this._potCount = this._initialPotCount;
+        this._wheelController.ResetWheelController();
     }
 
     public bool GetPotToThrow()
