@@ -154,6 +154,7 @@ public class PigPool : MonoBehaviour {
             {
                 go.transform.position = new Vector3(this.LaneBegin.transform.position.x, 4.3f - laneIndex * this.LaneHeight, this.transform.position.z + 2.0f);
                 go.SetActive(true);
+                go.GetComponent<HeavyPig>().OnSpawn();
                 return;
             }
         }

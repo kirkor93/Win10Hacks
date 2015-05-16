@@ -37,8 +37,13 @@ public class HeavyPig : MonoBehaviour {
         if (HP > 0) return;
         AudioSource.PlayClipAtPoint(DeathSound, Camera.main.transform.position, 0.4f);
         BurgerPool.Instance.SpawnBurger(this.myTransform.position);
-        HP = 3;
-        this.myAnimator.SetFloat("sth", (float)this.HP / 3.0f);
         this.gameObject.SetActive(false);
+    }
+
+    public void OnSpawn()
+    {
+        HP = 3;
+        this.myAnimator = this.GetComponent<Animator>();
+        this.myAnimator.SetFloat("sth", 1.0f);
     }
 }
