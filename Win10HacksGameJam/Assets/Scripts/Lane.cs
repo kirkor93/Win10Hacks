@@ -7,6 +7,8 @@ public class Lane : MonoBehaviour
     public int LaneIndex = 0;
 
     private Collider2D myCollider = null;
+    private bool potSpawned = false;
+    private float timer = 0.0f;
 
 	// Use this for initialization
 	void Start () 
@@ -18,16 +20,28 @@ public class Lane : MonoBehaviour
 	void Update ()
     {
         if (GameManager.Instance.IsPaused) return;
-	    if(Input.GetMouseButtonDown(0))
+        if(potSpawned)
         {
-            TryRaycast(Input.mousePosition);
-        }
-        if(Input.touchCount > 0)
-        {
-            foreach(Touch t in Input.touches)
+            timer += Time.deltaTime;
+            if(timer > 0.5f)
             {
-                if (t.phase != TouchPhase.Began) continue;
-                TryRaycast(t.position);
+                timer = 0.0f;
+                potSpawned = false;
+            }
+        }
+        else
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                TryRaycast(Input.mousePosition);
+            }
+            if (Input.touchCount > 0)
+            {
+                foreach (Touch t in Input.touches)
+                {
+                    if (t.phase != TouchPhase.Began) continue;
+                    TryRaycast(t.position);
+                }
             }
         }
 	}
@@ -45,6 +59,7 @@ public class Lane : MonoBehaviour
                 if(RightPanelController.instance.GetPotToThrow())
                 {
                     PotPool.Instance.SpawnPot(this.LaneIndex);
+                    potSpawned = true;
                 }
             }
         }
