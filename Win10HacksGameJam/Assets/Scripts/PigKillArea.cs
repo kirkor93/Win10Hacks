@@ -9,6 +9,7 @@ public class PigKillArea : MonoBehaviour {
     public Transform Min;
     public Transform Max;
     public GameObject FirePrefab;
+    public AudioSource FireSound;
 
     private float xDifference;
     private float yDifference;
@@ -55,11 +56,13 @@ public class PigKillArea : MonoBehaviour {
         float y = (float)rnd.NextDouble() * yDifference + Min.position.y;
         GameObject go = Instantiate(this.FirePrefab, new Vector3(x, y, 10.0f), Quaternion.identity) as GameObject;
         this.particles.Add(go);
+        FireSound.volume += 0.1f;
     }
 
     void Reset()
     {
         this.HP = 10;
+        FireSound.volume = 0.0f;
         foreach(GameObject p in this.particles)
         {
             Destroy(p);
