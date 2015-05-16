@@ -87,7 +87,7 @@ public class RightPanelController : MonoBehaviour
             this._currentPotProgres = Mathf.Clamp(this._currentPotProgres, 0.0f, 1.0f);
         }
     }
-    void ProcesPotIndicator()
+    public void ProcesPotIndicator()
     {
         this._potImage.fillAmount = this._currentPotProgres;
         this._potCouter.text = "x " + this._potCount + "/" + this.upgradeManager.MaxPotCount;
