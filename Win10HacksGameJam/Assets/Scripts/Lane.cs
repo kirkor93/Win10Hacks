@@ -18,8 +18,8 @@ public class Lane : MonoBehaviour
 	void Update ()
     {
         if (GameManager.Instance.IsPaused) return;
-#if UNITY_EDITOR
-        if(Input.GetMouseButtonDown(0))
+#if UNITY_STENGERT
+        if (Input.GetMouseButtonDown(0))
         {
             TryRaycast(Input.mousePosition);
         }
