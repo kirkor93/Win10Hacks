@@ -36,7 +36,7 @@ public class HeavyPig : MonoBehaviour {
         this.myAnimator.SetFloat("sth", (float)this.HP / 3.0f);
         if (HP > 0) return;
         GameManager.Instance.AddPig();
-        AudioSource.PlayClipAtPoint(DeathSound, Camera.main.transform.position, 0.15f);
+        AudioSource.PlayClipAtPoint(DeathSound, Camera.main.transform.position, 0.10f);
         BurgerPool.Instance.SpawnBurger(this.myTransform.position);
         this.gameObject.SetActive(false);
     }

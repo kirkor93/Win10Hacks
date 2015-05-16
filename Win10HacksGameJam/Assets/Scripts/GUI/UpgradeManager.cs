@@ -18,7 +18,7 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField]
     private Text textMaxStoneSpeed = null;
 
-    private int maxPotCountInitialValue = 10;
+    private int maxPotCountInitialValue = 5;
     private int maxPotCountStep = 5;
     private int maxPotCountStepCost = 50;
     private int maxPotCountLevel = 0;
