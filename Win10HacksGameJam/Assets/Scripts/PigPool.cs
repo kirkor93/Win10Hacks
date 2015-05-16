@@ -25,6 +25,7 @@ public class PigPool : MonoBehaviour {
     public GameObject PigPrefab;
     public GameObject SuperPigPrefab;
     public GameObject HeavyPigPrefab;
+    public GameObject InstantPigPrefab;
     public float LaneHeight = 3.33f;
     public int StartPigCount = 5;
     public GameObject LaneBegin;
@@ -32,6 +33,7 @@ public class PigPool : MonoBehaviour {
     private List<GameObject> allPigs = new List<GameObject>();
     private List<GameObject> allSuperPigs = new List<GameObject>();
     private List<GameObject> allHeavyPigs = new List<GameObject>();
+    private List<GameObject> allInstantPigs = new List<GameObject>();
 
 	// Use this for initialization
 	void Start () 
@@ -57,6 +59,13 @@ public class PigPool : MonoBehaviour {
             go.transform.parent = this.transform;
             this.allHeavyPigs.Add(go);
         }
+        for (int i = 0; i < this.StartPigCount; ++i)
+        {
+            GameObject go = GameObject.Instantiate(this.InstantPigPrefab, this.transform.position, Quaternion.identity) as GameObject;
+            go.SetActive(false);
+            go.transform.parent = this.transform;
+            this.allInstantPigs.Add(go);
+        }
         GameManager.Instance.OnReset += Reset;
 	}
 
@@ -72,10 +81,33 @@ public class PigPool : MonoBehaviour {
         {
             SpawnSuperPig(laneIndex);
         }
+        else if(r > 0.4f)
+        {
+            SpawnInstantPig(laneIndex);
+        }
         else
         {
             SpawnNormalPig(laneIndex);
         }
+    }
+
+    private void SpawnInstantPig(int laneIndex)
+    {
+        foreach (GameObject go in allInstantPigs)
+        {
+            if (!go.activeInHierarchy)
+            {
+                go.transform.position = new Vector3(this.LaneBegin.transform.position.x, 4.3f - laneIndex * this.LaneHeight, this.transform.position.z + 2.0f);
+                go.SetActive(true);
+                go.GetComponent<InstantPig>().MyLane = laneIndex;
+                return;
+            }
+        }
+
+        GameObject pig = GameObject.Instantiate(InstantPigPrefab, new Vector3(this.LaneBegin.transform.position.x, 4.3f - laneIndex * LaneHeight, this.transform.position.z + 2.0f), Quaternion.identity) as GameObject;
+        pig.transform.parent = this.transform;
+        pig.GetComponent<InstantPig>().MyLane = laneIndex;
+        this.allInstantPigs.Add(pig);
     }
 
     private void SpawnNormalPig(int laneIndex)
