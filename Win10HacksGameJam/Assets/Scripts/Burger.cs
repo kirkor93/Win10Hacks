@@ -5,6 +5,7 @@ public class Burger : MonoBehaviour {
 
     public Color BlinkingColor;
     public float BlinkingSpeed = 2.0f;
+    public AudioClip BurgerCollectSound;
 
     private Collider2D myCollider = null;
     private SpriteRenderer myRenderer = null;
@@ -67,6 +68,8 @@ public class Burger : MonoBehaviour {
             if (hit.collider == this.myCollider)
             {
                 //Collect burger
+                AudioSource.PlayClipAtPoint(this.BurgerCollectSound, Camera.main.transform.position);
+                this.destroyTimer = 0.0f;
                 this.gameObject.SetActive(false);
             }
         }
