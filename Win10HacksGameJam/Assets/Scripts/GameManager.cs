@@ -63,4 +63,9 @@ public class GameManager : MonoBehaviour
     {
         this.cashValue += burgerCashValue;
     }
+
+    public int GetCash()
+    {
+        return this.cashValue;
+    }
 }
