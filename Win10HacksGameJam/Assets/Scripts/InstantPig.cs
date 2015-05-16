@@ -5,6 +5,8 @@ public class InstantPig : MonoBehaviour {
     public float Speed = 5.0f;
     public float ChangeLaneSpeed = 3.0f;
     public AudioClip DeathSound;
+    public ParticleSystem TopFlame;
+    public ParticleSystem BottomFlame;
     [HideInInspector]
     public int MyLane;
 
@@ -32,14 +34,30 @@ public class InstantPig : MonoBehaviour {
         {
             changeLaneTimer = 0.0f;
             lerpTimer = 0.0f;
-            if (MyLane == 4) MyLane = 3;
-            else if (MyLane == 0) MyLane = 1;
+            if (MyLane == 4)
+            {
+                BottomFlame.Emit(10);
+                MyLane = 3;
+            }
+            else if (MyLane == 0)
+            {
+                MyLane = 1;
+                TopFlame.Emit(10);
+            }
             else
             {
                 System.Random rnd = new System.Random();
                 int r = rnd.Next() % 2;
-                if (r > 0) MyLane += 1;
-                else MyLane -= 1;
+                if (r > 0)
+                {
+                    TopFlame.Emit(10);
+                    MyLane += 1;
+                }
+                else
+                {
+                    BottomFlame.Emit(10);
+                    MyLane -= 1;
+                }
             }
             oldPosition = this.transform.position;
             newPosition = new Vector3(this.transform.position.x, 4.3f - MyLane * 2.15f, this.transform.position.z);
