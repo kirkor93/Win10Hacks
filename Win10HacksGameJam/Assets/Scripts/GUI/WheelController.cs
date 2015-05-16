@@ -22,6 +22,8 @@ public class WheelController : MonoBehaviour
     private float _direction = -1.0f;
     public float _spinTheWheelValue = 45.0f;
 
+    private AudioSource audioSource;
+
     public float CurrentSpeed
     {
         get
@@ -49,6 +51,8 @@ public class WheelController : MonoBehaviour
         {
             Debug.LogError("Missing reference to pot counter.");
         }
+
+        this.audioSource = this.GetComponent<AudioSource>();
     }
 
     void Update()
@@ -64,6 +68,14 @@ public class WheelController : MonoBehaviour
     {
         this._currentSpeed -= this._speedDrag * Time.deltaTime;
         this._currentSpeed = Mathf.Clamp(this._currentSpeed, this._minSpeed, this._maxSpeed);
+        if(this._currentSpeed > 0.0f)
+        {
+            this.audioSource.volume = 1.0f;
+        }
+        else
+        {
+            this.audioSource.volume = 0.0f;
+        }
 
         Quaternion quat = this._wheelImage.rectTransform.rotation;
         Vector3 rot = quat.eulerAngles;
