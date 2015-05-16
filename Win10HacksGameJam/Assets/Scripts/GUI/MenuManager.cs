@@ -7,7 +7,8 @@ public enum GameState
     GS_MENUSTORY = 1,
     GS_MENUSTORY_GOTOGAME = 2,
     GS_MENUPAUSE = 3,
-    GS_GAME = 4
+    GS_GAME = 4,
+    GS_SCORESCREEN = 5
 }
 
 public class MenuManager : MonoBehaviour 
