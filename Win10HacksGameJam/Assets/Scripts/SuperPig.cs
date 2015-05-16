@@ -28,7 +28,7 @@ public class SuperPig : MonoBehaviour {
 
     void SmashPig()
     {
-        AudioSource.PlayClipAtPoint(DeathSound, Camera.main.transform.position);
+        AudioSource.PlayClipAtPoint(DeathSound, Camera.main.transform.position, 0.4f);
         BurgerPool.Instance.SpawnBurger(this.myTransform.position);
         this.gameObject.SetActive(false);
     }

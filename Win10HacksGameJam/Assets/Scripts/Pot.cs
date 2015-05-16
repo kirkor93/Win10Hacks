@@ -28,7 +28,7 @@ public class Pot : MonoBehaviour {
         if(col.gameObject.layer == LayerMask.NameToLayer("Pig"))
         {
             col.gameObject.SendMessage("SmashPig");
-            AudioSource.PlayClipAtPoint(this.PotBreakSound, Camera.main.transform.position);
+            AudioSource.PlayClipAtPoint(this.PotBreakSound, Camera.main.transform.position, 0.4f);
             this.gameObject.SetActive(false);
         }
     }
