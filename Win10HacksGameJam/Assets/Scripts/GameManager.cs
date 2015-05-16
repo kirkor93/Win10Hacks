@@ -2,9 +2,11 @@
 using System.Collections;
 using System;
 
-public class GameManager : MonoBehaviour {
-
+public class GameManager : MonoBehaviour 
+{
     private static GameManager instance;
+    private int cashValue = 0;
+    private int burgerCashValue = 5;
 
     public static GameManager Instance
     {
@@ -35,6 +37,7 @@ public class GameManager : MonoBehaviour {
 
     public void Reset()
     {
+        cashValue = 0;
         if(OnReset != null)
         {
             OnReset();
@@ -55,5 +58,9 @@ public class GameManager : MonoBehaviour {
     {
         this.isPaused = true;
         //Game over logic
+    }
+    public void AddBurger()
+    {
+        this.cashValue += burgerCashValue;
     }
 }

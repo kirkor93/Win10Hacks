@@ -68,6 +68,7 @@ public class Burger : MonoBehaviour {
             if (hit.collider == this.myCollider)
             {
                 //Collect burger
+                GameManager.Instance.AddBurger();
                 AudioSource.PlayClipAtPoint(this.BurgerCollectSound, Camera.main.transform.position);
                 this.destroyTimer = 0.0f;
                 this.gameObject.SetActive(false);
