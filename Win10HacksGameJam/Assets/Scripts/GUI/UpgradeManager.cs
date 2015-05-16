@@ -7,6 +7,9 @@ public class UpgradeManager : MonoBehaviour
     private const int maxUpgradeLevel = 3;
 
     [SerializeField]
+    private RightPanelController rightPanelController = null;
+
+    [SerializeField]
     private Button buttonMaxPotCount = null;
     [SerializeField]
     private Text textMaxPotCount = null;
@@ -104,6 +107,7 @@ public class UpgradeManager : MonoBehaviour
         GameManager.Instance.SetCash(tmp);
         this.maxPotCountLevel += 1;
         UpdateUpgrades();
+        this.rightPanelController.ProcesPotIndicator();
     }
     public void BuyMaxStoneSpeedUpgrade()
     {
@@ -112,6 +116,7 @@ public class UpgradeManager : MonoBehaviour
         GameManager.Instance.SetCash(tmp);
         this.maxStoneSpeedLevel += 1;
         UpdateUpgrades();
+        this.rightPanelController.ProcesPotIndicator();
     }
 
 	void Start () {
