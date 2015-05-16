@@ -100,6 +100,7 @@ public class PigPool : MonoBehaviour {
                 go.transform.position = new Vector3(this.LaneBegin.transform.position.x, 4.3f - laneIndex * this.LaneHeight, this.transform.position.z + 2.0f);
                 go.SetActive(true);
                 go.GetComponent<InstantPig>().MyLane = laneIndex;
+                go.GetComponent<InstantPig>().OnSpawn();
                 return;
             }
         }
@@ -107,6 +108,7 @@ public class PigPool : MonoBehaviour {
         GameObject pig = GameObject.Instantiate(InstantPigPrefab, new Vector3(this.LaneBegin.transform.position.x, 4.3f - laneIndex * LaneHeight, this.transform.position.z + 2.0f), Quaternion.identity) as GameObject;
         pig.transform.parent = this.transform;
         pig.GetComponent<InstantPig>().MyLane = laneIndex;
+        pig.GetComponent<InstantPig>().OnSpawn();
         this.allInstantPigs.Add(pig);
     }
 
@@ -164,6 +166,18 @@ public class PigPool : MonoBehaviour {
     void Reset()
     {
         foreach(GameObject go in this.allPigs)
+        {
+            go.SetActive(false);
+        }
+        foreach(GameObject go in this.allHeavyPigs)
+        {
+            go.SetActive(false);
+        }
+        foreach(GameObject go in this.allInstantPigs)
+        {
+            go.SetActive(false);
+        }
+        foreach(GameObject go in this.allSuperPigs)
         {
             go.SetActive(false);
         }

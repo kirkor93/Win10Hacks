@@ -9,19 +9,31 @@ public class PigManager : MonoBehaviour {
     public int LaneNumber = 3;
 
     private float currentPigSpawnCooldown;
+    private float makeItFasterTimer = 0.0f;
+    private float spawnPigTimer = 0.0f;
 
 	// Use this for initialization
 	void Start () 
     {
         currentPigSpawnCooldown = InitialPigSpawnCooldown;
-        Invoke("SpawnPig", 0.5f);
-        InvokeRepeating("MakeSpawningFaster", this.MakeSpawningFasterCooldown, this.MakeSpawningFasterCooldown);
         GameManager.Instance.OnReset += Reset;
 	}
 
     void Update()
     {
         if (GameManager.Instance.IsPaused) return;
+        makeItFasterTimer += Time.deltaTime;
+        spawnPigTimer += Time.deltaTime;
+        if(spawnPigTimer > currentPigSpawnCooldown)
+        {
+            spawnPigTimer = 0.0f;
+            SpawnPig();
+        }
+        if(makeItFasterTimer > MakeSpawningFasterCooldown)
+        {
+            makeItFasterTimer = 0.0f;
+            currentPigSpawnCooldown *= (1.0f - SpawningCooldownDecreaseRate);
+        }
     }
 
     private void SpawnPig()
@@ -29,20 +41,12 @@ public class PigManager : MonoBehaviour {
         System.Random rnd = new System.Random();
         int lane = (int)rnd.Next() % this.LaneNumber;
         PigPool.Instance.SpawnPig(lane);
-        Invoke("SpawnPig", this.currentPigSpawnCooldown);
-    }
-
-    private void MakeSpawningFaster()
-    {
-        this.currentPigSpawnCooldown *= (1.0f - this.SpawningCooldownDecreaseRate);
     }
 
     void Reset()
     {
-        CancelInvoke("MakeSpawningFaster");
-        CancelInvoke("SpawnPig");
         currentPigSpawnCooldown = this.InitialPigSpawnCooldown;
-        Invoke("SpawnPig", 0.5f);
-        InvokeRepeating("MakeSpawningFaster", this.MakeSpawningFasterCooldown, this.MakeSpawningFasterCooldown);
+        spawnPigTimer = 0.0f;
+        makeItFasterTimer = 0.0f;
     }
 }

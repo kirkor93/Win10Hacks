@@ -69,6 +69,7 @@ public class Burger : MonoBehaviour {
             {
                 //Collect burger
                 AudioSource.PlayClipAtPoint(this.BurgerCollectSound, Camera.main.transform.position);
+                this.destroyTimer = 0.0f;
                 this.gameObject.SetActive(false);
             }
         }
