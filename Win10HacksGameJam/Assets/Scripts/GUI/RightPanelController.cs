@@ -90,7 +90,7 @@ public class RightPanelController : MonoBehaviour
     void ProcesPotIndicator()
     {
         this._potImage.fillAmount = this._currentPotProgres;
-        this._potCouter.text = "x " + this._potCount;
+        this._potCouter.text = "x " + this._potCount + "/" + this.upgradeManager.MaxPotCount;
         this._cashCounter.text = "x " + GameManager.Instance.GetCash().ToString();
         
     }
