@@ -4,6 +4,7 @@ using System.Collections;
 public class Pig : MonoBehaviour {
 
     public float Speed = 3.0f;
+    public AudioClip DeathSound;
 
     private Transform myTransform;
 
@@ -27,6 +28,7 @@ public class Pig : MonoBehaviour {
 
     void SmashPig()
     {
+        AudioSource.PlayClipAtPoint(DeathSound, Camera.main.transform.position);
         BurgerPool.Instance.SpawnBurger(this.myTransform.position);
         this.gameObject.SetActive(false);
     }

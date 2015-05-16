@@ -4,6 +4,7 @@ using System.Collections;
 public class HeavyPig : MonoBehaviour {
 
     public float Speed = 3.0f;
+    public AudioClip DeathSound;
 
     private Transform myTransform;
     private int HP = 3;
@@ -33,6 +34,7 @@ public class HeavyPig : MonoBehaviour {
         --HP;
         this.myAnimator.SetInteger("HP", this.HP);
         if (HP > 0) return;
+        AudioSource.PlayClipAtPoint(DeathSound, Camera.main.transform.position);
         BurgerPool.Instance.SpawnBurger(this.myTransform.position);
         HP = 3;
         this.gameObject.SetActive(false);
