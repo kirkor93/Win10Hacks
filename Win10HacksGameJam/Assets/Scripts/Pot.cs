@@ -5,6 +5,7 @@ public class Pot : MonoBehaviour {
 
     public float RollSpeed = 10.0f;
     public float Speed = 8.0f;
+    public AudioClip PotBreakSound;
 
     private Transform myTransform;
 
@@ -27,6 +28,7 @@ public class Pot : MonoBehaviour {
         if(col.gameObject.layer == LayerMask.NameToLayer("Pig"))
         {
             col.gameObject.SendMessage("SmashPig");
+            AudioSource.PlayClipAtPoint(this.PotBreakSound, Camera.main.transform.position);
             this.gameObject.SetActive(false);
         }
     }
