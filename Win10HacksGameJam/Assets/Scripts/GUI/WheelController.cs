@@ -30,6 +30,11 @@ public class WheelController : MonoBehaviour
         }
     }
 
+    public void ResetWheelController()
+    {
+        this._currentSpeed = this._minSpeed;
+    }
+
     void Start()
     {
         if (this._wheelImage == null)
@@ -48,8 +53,11 @@ public class WheelController : MonoBehaviour
 
     void Update()
     {
-        ProcesWheel();
-        UpdateLabels();
+        if (!GameManager.Instance.IsPaused)
+        {
+            ProcesWheel();
+            UpdateLabels();
+        }
     }
 
     private void ProcesWheel()
